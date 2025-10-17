@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kompleksowe usługi warsztatowe: mechanika, diagnostyka, klimatyzacja, wymiana opon, hamulce, zawieszenie, tuning i wulkanizacja. DriftBoyz Garage Piastów.">
+    <meta name="keywords" content="mechanik piastów, warsztat samochodowy piastów, tuning, diagnostyka, serwis klimatyzacji">
+    
+    <title>Usługi - DriftBoyz Garage | Warsztat Samochodowy Piastów</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/assets/css/variables.css">
+    <link rel="stylesheet" href="src/assets/css/reset.css">
+    <link rel="stylesheet" href="src/assets/css/header.css">
+    <link rel="stylesheet" href="src/assets/css/hero.css">
+    <link rel="stylesheet" href="src/assets/css/components.css">
+    <link rel="stylesheet" href="src/assets/css/footer.css">
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER & NAVIGATION
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">DriftBoyz</a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Start</a></li>
+                    <li><a href="o-nas.html" class="nav__link">O nas</a></li>
+                    <li><a href="uslugi.html" class="nav__link active">Usługi</a></li>
+                    <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                    <li><a href="cennik.html" class="nav__link">Cennik</a></li>
+                    <li><a href="blog.html" class="nav__link">Blog</a></li>
+                    <li><a href="kontakt.html" class="nav__cta">Kontakt</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav__toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="hero" style="min-height: 50vh; padding-top: calc(var(--header-height) + 60px);">
+        <div class="hero__container">
+            <div class="hero__content">
+                <h1 class="hero__logo" style="font-size: var(--fs-h1);">Nasze Usługi</h1>
+                <p class="hero__tagline" style="font-size: 24px;">Kompleksowa obsługa Twojego pojazdu</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: MECHANIKA POJAZDOWA
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="two-column">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=800&h=600&fit=crop" 
+                         alt="Mechanika pojazdowa" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-gold); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--black); font-weight: 700; font-size: 14px;">OD 150 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-cog" style="color: var(--gold); margin-right: 12px;"></i>
+                        Mechanika Pojazdowa
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Kompleksowa obsługa mechaniczna wszystkich marek pojazdów. Od rutynowych przeglądów 
+                        po skomplikowane naprawy silnika, układu napędowego i skrzyni biegów.
+                    </p>
+                    
+                    <h4 style="color: var(--gold); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Przeglądy okresowe i serwisowe</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Naprawa silnika i układu napędowego</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Wymiana rozrządu i paska klinowego</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Naprawa sprzęgła i skrzyni biegów</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Wymiana oleju i filtrów</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: DIAGNOSTYKA KOMPUTEROWA
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div class="two-column" style="flex-direction: row-reverse;">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=600&fit=crop" 
+                         alt="Diagnostyka komputerowa" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-blue); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--white); font-weight: 700; font-size: 14px;">OD 100 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-laptop-code" style="color: var(--blue-m); margin-right: 12px;"></i>
+                        Diagnostyka Komputerowa
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Nowoczesna diagnostyka z wykorzystaniem profesjonalnego sprzętu. Szybka i precyzyjna 
+                        identyfikacja usterek w systemach elektronicznych pojazdu.
+                    </p>
+                    
+                    <h4 style="color: var(--blue-m); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Odczyt i kasowanie kodów błędów</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Diagnostyka silnika i układów elektronicznych</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Test systemów ABS, ESP, airbag</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Kodowanie i programowanie sterowników</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Analiza parametrów w czasie rzeczywistym</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn" style="background: var(--gradient-blue);">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: SERWIS KLIMATYZACJI
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="two-column">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop" 
+                         alt="Serwis klimatyzacji" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-gold); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--black); font-weight: 700; font-size: 14px;">OD 120 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-snowflake" style="color: var(--gold); margin-right: 12px;"></i>
+                        Serwis Klimatyzacji
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Profesjonalny serwis klimatyzacji z wykorzystaniem certyfikowanego sprzętu. 
+                        Dezynfekcja, naprawa i uzupełnianie czynnika chłodniczego.
+                    </p>
+                    
+                    <h4 style="color: var(--gold); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Uzupełnianie i wymiana czynnika</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Dezynfekcja i czyszczenie układu</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Test szczelności i ciśnienia</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Naprawa sprężarek i skraplaczy</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Wymiana filtrów kabinowych</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: WYMIANA OPON
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div class="two-column" style="flex-direction: row-reverse;">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" 
+                         alt="Wymiana opon" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-blue); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--white); font-weight: 700; font-size: 14px;">OD 80 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-circle-notch" style="color: var(--blue-m); margin-right: 12px;"></i>
+                        Wymiana Opon i Przechowywanie
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Sezonowa wymiana opon z wyważaniem, możliwość przechowywania kompletu kół. 
+                        Profesjonalny serwis oponiarsko-wulkanizacyjny.
+                    </p>
+                    
+                    <h4 style="color: var(--blue-m); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Wymiana opon letnich/zimowych</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Wyważanie kół komputerowe</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Przechowywanie kompletu kół</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Sprzedaż nowych opon</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Doradztwo w doborze opon</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn" style="background: var(--gradient-blue);">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: UKŁAD HAMULCOWY
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="two-column">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&h=600&fit=crop" 
+                         alt="Układ hamulcowy" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-gold); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--black); font-weight: 700; font-size: 14px;">OD 200 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-brake-warning" style="color: var(--gold); margin-right: 12px;"></i>
+                        Układ Hamulcowy
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Kompleksowa obsługa układu hamulcowego. Wymiana klocków, tarcz, przewodów i płynu 
+                        hamulcowego. Bezpieczeństwo to priorytet.
+                    </p>
+                    
+                    <h4 style="color: var(--gold); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Wymiana klocków i tarcz hamulcowych</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Naprawa zacisków i cylinderków</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Wymiana płynu hamulcowego</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Wymiana przewodów hamulcowych</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Regeneracja hamulców bębnowych</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: ZAWIESZENIE
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div class="two-column" style="flex-direction: row-reverse;">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop" 
+                         alt="Zawieszenie" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-blue); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--white); font-weight: 700; font-size: 14px;">OD 180 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-car-crash" style="color: var(--blue-m); margin-right: 12px;"></i>
+                        Naprawa Zawieszenia
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Diagnostyka i naprawa układu zawieszenia. Wymiana amortyzatorów, wahaczy, 
+                        stabilizatorów. Geometria kół 3D z najwyższą precyzją.
+                    </p>
+                    
+                    <h4 style="color: var(--blue-m); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Wymiana amortyzatorów i sprężyn</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Wymiana wahaczy i łączników</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Geometria kół 3D</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Wymiana tulei i łożysk</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Setup sportowy dla aut drift/track</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn" style="background: var(--gradient-blue);">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: TUNING & PERFORMANCE
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="two-column">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=600&fit=crop" 
+                         alt="Tuning i performance" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-gold); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--black); font-weight: 700; font-size: 14px;">OD 500 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-tachometer-alt" style="color: var(--gold); margin-right: 12px;"></i>
+                        Tuning & Performance
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Zwiększenie mocy i momentu obrotowego silnika. Chip tuning, modyfikacje wydechów, 
+                        custom setup. Specjalizujemy się w autach drift i sportowych.
+                    </p>
+                    
+                    <h4 style="color: var(--gold); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Chip tuning i remap ECU</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Modyfikacje układu wydechowego</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Montaż turbosprężarek</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Przygotowanie aut drift/track</li>
+                        <li><i class="fas fa-check" style="color: var(--gold); margin-right: 8px;"></i> Custom projekty i budowy</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICE: WULKANIZACJA
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div class="two-column" style="flex-direction: row-reverse;">
+                <div class="two-column__image">
+                    <img src="https://images.unsplash.com/photo-1596636766757-5b72de8e0b01?w=800&h=600&fit=crop" 
+                         alt="Wulkanizacja" 
+                         loading="lazy">
+                </div>
+                <div>
+                    <div style="display: inline-block; padding: 8px 16px; background: var(--gradient-blue); border-radius: var(--radius-sm); margin-bottom: var(--space-md);">
+                        <span style="color: var(--white); font-weight: 700; font-size: 14px;">OD 30 ZŁ</span>
+                    </div>
+                    <h2 class="section__title">
+                        <i class="fas fa-tools" style="color: var(--blue-m); margin-right: 12px;"></i>
+                        Wulkanizacja
+                    </h2>
+                    <p style="color: var(--gray-light); margin-bottom: var(--space-md); line-height: 1.8;">
+                        Naprawa opon, łatanie dętek, wymiana wentyli. Szybka pomoc w przypadku 
+                        przebicia opony. Profesjonalny sprzęt wulkanizacyjny.
+                    </p>
+                    
+                    <h4 style="color: var(--blue-m); margin-bottom: var(--space-sm); font-size: 18px;">Co obejmuje:</h4>
+                    <ul style="list-style: none; color: var(--gray-light); margin-bottom: var(--space-lg); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Naprawa przebitych opon</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Łatanie dętek motocyklowych</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Wymiana wentyli i czujników TPMS</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Pompowanie azotu</li>
+                        <li><i class="fas fa-check" style="color: var(--blue-m); margin-right: 8px;"></i> Naprawa uszkodzonych felg</li>
+                    </ul>
+
+                    <a href="kontakt.html" class="btn" style="background: var(--gradient-blue);">
+                        <i class="fas fa-calendar"></i>
+                        Umów wizytę
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div style="background: var(--gradient-gold); border-radius: var(--radius-lg); padding: var(--space-2xl); text-align: center;">
+                <h2 style="color: var(--black); font-size: var(--fs-h1); margin-bottom: var(--space-md);">
+                    Nie widzisz swojej usługi?
+                </h2>
+                <p style="color: var(--black); font-size: 18px; max-width: 600px; margin: 0 auto var(--space-xl) auto;">
+                    Zadzwoń do nas - zajmiemy się praktycznie każdym problemem z Twoim autem
+                </p>
+                <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="tel:726796168" class="btn" style="background: var(--black); color: var(--gold);">
+                        <i class="fas fa-phone"></i>
+                        726 796 168
+                    </a>
+                    <a href="cennik.html" class="btn" style="background: transparent; color: var(--black); border: 2px solid var(--black);">
+                        <i class="fas fa-tags"></i>
+                        Zobacz cennik
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__main">
+                <!-- About Column -->
+                <div>
+                    <div class="footer__logo">DriftBoyz</div>
+                    <p class="footer__tagline">DRIFT. CUSTOM. PERFORMANCE.</p>
+                    <p class="footer__description">
+                        Profesjonalny warsztat samochodowy w Piastowie. 
+                        Specjalizujemy się w mechanice, diagnostyce i tuningu.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://facebook.com/driftboyzgarage" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/driftboyzgarage" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@driftboyzgarage" class="social-icon" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://tiktok.com/@driftboyzgarage" class="social-icon" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="footer__section-title">Szybkie linki</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Start</a></li>
+                        <li><a href="o-nas.html" class="footer__link">O nas</a></li>
+                        <li><a href="uslugi.html" class="footer__link">Usługi</a></li>
+                        <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+                        <li><a href="cennik.html" class="footer__link">Cennik</a></li>
+                        <li><a href="blog.html" class="footer__link">Blog</a></li>
+                        <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="footer__section-title">Kontakt</h4>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-map-marker-alt footer__contact-icon"></i>
+                        <div>
+                            <p>ul. Warszawska 49/51</p>
+                            <p>05-820 Piastów</p>
+                        </div>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-phone footer__contact-icon"></i>
+                        <a href="tel:726796168" class="footer__contact-link">726 796 168</a>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-envelope footer__contact-icon"></i>
+                        <a href="mailto:kontakt@driftboyzgarage.pl" class="footer__contact-link">
+                            kontakt@driftboyzgarage.pl
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="footer__section-title">Godziny otwarcia</h4>
+                    <div class="footer__hours">
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Poniedziałek - Piątek:</span>
+                            <span class="footer__hour-time">8:00 - 18:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Sobota:</span>
+                            <span class="footer__hour-time">12:00 - 16:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Niedziela:</span>
+                            <span class="footer__hour-time">Zamknięte</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 DriftBoyz Garage. Wszystkie prawa zastrzeżone.
+                </p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Polityka prywatności</a>
+                    <a href="#" class="footer__legal-link">Regulamin</a>
+                    <a href="#" class="footer__legal-link">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="src/assets/js/main.js"></script>
+</body>
+</html>

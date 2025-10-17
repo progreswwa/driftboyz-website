@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog motoryzacyjny DriftBoyz Garage - porady, tutoriale, przewodniki. Wymiana oleju, przygotowanie do zimy, diagnostyka, chip tuning, geometria kół.">
+    <meta name="keywords" content="blog motoryzacyjny, poradnik warsztat, wymiana oleju, przygotowanie auta do zimy, diagnostyka komputerowa, chip tuning, geometria kół">
+    
+    <title>Blog - DriftBoyz Garage | Porady i Poradniki Motoryzacyjne</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/assets/css/variables.css">
+    <link rel="stylesheet" href="src/assets/css/reset.css">
+    <link rel="stylesheet" href="src/assets/css/header.css">
+    <link rel="stylesheet" href="src/assets/css/hero.css">
+    <link rel="stylesheet" href="src/assets/css/components.css">
+    <link rel="stylesheet" href="src/assets/css/footer.css">
+    
+    <style>
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: var(--gray-dark);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 40px rgba(255, 181, 46, 0.2);
+        }
+
+        .blog-card__image {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .blog-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all var(--transition-slow);
+        }
+
+        .blog-card:hover .blog-card__image img {
+            transform: scale(1.1);
+        }
+
+        .blog-card__category {
+            position: absolute;
+            top: var(--space-md);
+            left: var(--space-md);
+            padding: 6px 12px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+        }
+
+        .blog-card__content {
+            padding: var(--space-lg);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card__meta {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .blog-card__meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .blog-card__meta-item i {
+            color: var(--gold);
+        }
+
+        .blog-card__title {
+            color: var(--white);
+            font-size: var(--fs-h4);
+            margin-bottom: var(--space-md);
+            font-family: var(--font-heading);
+            line-height: 1.3;
+        }
+
+        .blog-card__excerpt {
+            color: var(--gray-light);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+            flex: 1;
+        }
+
+        .blog-card__link {
+            color: var(--gold);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .blog-card__link:hover {
+            gap: var(--space-md);
+        }
+
+        .blog-card__link i {
+            transition: all var(--transition-normal);
+        }
+
+        /* Featured Article */
+        .featured-article {
+            background: var(--gray-dark);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--space-2xl);
+            border: 2px solid var(--gold);
+        }
+
+        .featured-article__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+        }
+
+        @media (max-width: 968px) {
+            .featured-article__content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-article__image {
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .featured-article__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-article__text {
+            padding: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-article__badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+            width: fit-content;
+        }
+
+        .featured-article__title {
+            color: var(--white);
+            font-size: var(--fs-h2);
+            margin-bottom: var(--space-md);
+            font-family: var(--font-heading);
+            line-height: 1.2;
+        }
+
+        .featured-article__excerpt {
+            color: var(--gray-light);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: var(--space-xl);
+        }
+
+        .featured-article__meta {
+            display: flex;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .featured-article__meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .featured-article__meta-item i {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER & NAVIGATION
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">DriftBoyz</a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Start</a></li>
+                    <li><a href="o-nas.html" class="nav__link">O nas</a></li>
+                    <li><a href="uslugi.html" class="nav__link">Usługi</a></li>
+                    <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                    <li><a href="cennik.html" class="nav__link">Cennik</a></li>
+                    <li><a href="blog.html" class="nav__link active">Blog</a></li>
+                    <li><a href="kontakt.html" class="nav__cta">Kontakt</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav__toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="hero" style="min-height: 50vh; padding-top: calc(var(--header-height) + 60px);">
+        <div class="hero__container">
+            <div class="hero__content">
+                <h1 class="hero__logo" style="font-size: var(--fs-h1);">Blog</h1>
+                <p class="hero__tagline" style="font-size: 24px;">Porady, tutoriale i ciekawostki motoryzacyjne</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURED ARTICLE
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="featured-article">
+                <div class="featured-article__content">
+                    <div class="featured-article__image">
+                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=800&h=600&fit=crop" 
+                             alt="Chip tuning - zwiększenie mocy" 
+                             loading="lazy">
+                    </div>
+                    <div class="featured-article__text">
+                        <span class="featured-article__badge">Wyróżniony artykuł</span>
+                        <h2 class="featured-article__title">Chip Tuning - Jak Bezpiecznie Zwiększyć Moc Silnika?</h2>
+                        <div class="featured-article__meta">
+                            <span class="featured-article__meta-item">
+                                <i class="fas fa-calendar"></i>
+                                15 października 2025
+                            </span>
+                            <span class="featured-article__meta-item">
+                                <i class="fas fa-clock"></i>
+                                8 min czytania
+                            </span>
+                        </div>
+                        <p class="featured-article__excerpt">
+                            Chip tuning to jedna z najpopularniejszych metod zwiększania mocy silnika. 
+                            Dowiedz się, jak działa remapping ECU, jakie są etapy tuningu (Stage 1, 2, 3), 
+                            czy jest to bezpieczne dla silnika i ile można zyskać mocy. Wszystko co musisz 
+                            wiedzieć przed wizytą w warsztacie tuningowym.
+                        </p>
+                        <a href="#chip-tuning" class="btn">
+                            <i class="fas fa-book-open"></i>
+                            Czytaj więcej
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BLOG ARTICLES
+         ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section__header">
+                <p class="section__subtitle">NAJNOWSZE WPISY</p>
+                <h2 class="section__title">Poznaj nasze porady</h2>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Article 1: Wymiana oleju -->
+                <article class="blog-card" id="wymiana-oleju">
+                    <div class="blog-card__image">
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop" 
+                             alt="Wymiana oleju w samochodzie" 
+                             loading="lazy">
+                        <span class="blog-card__category">Poradnik</span>
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-calendar"></i>
+                                12 października 2025
+                            </span>
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-clock"></i>
+                                5 min
+                            </span>
+                        </div>
+                        <h3 class="blog-card__title">
+                            Wymiana Oleju - Kiedy i Jak Często?
+                        </h3>
+                        <p class="blog-card__excerpt">
+                            Regularna wymiana oleju to podstawa dbania o silnik. Dowiedz się, jak często 
+                            powinieneś wymieniać olej, jakie są różnice między olejami syntetycznymi 
+                            a mineralnymi, oraz czy warto stosować się do zaleceń producenta. 
+                            Poznaj objawy zużytego oleju i konsekwencje zaniedbania tej usługi.
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Najważniejsze informacje:</strong><br>
+                            • Oleje syntetyczne: wymiana co 15 000 - 20 000 km<br>
+                            • Oleje półsyntetyczne: co 10 000 - 15 000 km<br>
+                            • Oleje mineralne: co 7 000 - 10 000 km<br>
+                            • Wymieniaj zawsze z filtrem oleju<br>
+                            • Jazda miejska = częstsza wymiana
+                        </p>
+                        <a href="#wymiana-oleju" class="blog-card__link">
+                            Czytaj dalej
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2: Przygotowanie do zimy -->
+                <article class="blog-card" id="przygotowanie-zimy">
+                    <div class="blog-card__image">
+                        <img src="https://images.unsplash.com/photo-1483691278019-cb7253bee49f?w=600&h=400&fit=crop" 
+                             alt="Przygotowanie samochodu do zimy" 
+                             loading="lazy">
+                        <span class="blog-card__category">Sezonowo</span>
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-calendar"></i>
+                                10 października 2025
+                            </span>
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-clock"></i>
+                                6 min
+                            </span>
+                        </div>
+                        <h3 class="blog-card__title">
+                            Przygotowanie Auta do Zimy - Kompletny Poradnik
+                        </h3>
+                        <p class="blog-card__excerpt">
+                            Zima to trudny okres dla samochodu. Zobacz, co powinieneś sprawdzić przed 
+                            sezonem zimowym, aby uniknąć niespodzianek. Od akumulatora, przez płyny, 
+                            po ogumienie - wszystko co musisz wiedzieć o przygotowaniu auta do mrozów.
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Lista kontrolna przed zimą:</strong><br>
+                            ✓ Akumulator - test pojemności i ładowania<br>
+                            ✓ Płyn chłodniczy - odporność na mróz<br>
+                            ✓ Olej - zimowa lepkość (5W30, 0W40)<br>
+                            ✓ Opony zimowe - min. 4mm bieżnika<br>
+                            ✓ Świece żarowe (diesel)<br>
+                            ✓ Filtr kabinowy<br>
+                            ✓ Wycieraczki i płyn do spryskiwaczy
+                        </p>
+                        <a href="#przygotowanie-zimy" class="blog-card__link">
+                            Czytaj dalej
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3: Diagnostyka -->
+                <article class="blog-card" id="diagnostyka">
+                    <div class="blog-card__image">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop" 
+                             alt="Diagnostyka komputerowa samochodu" 
+                             loading="lazy">
+                        <span class="blog-card__category">Technologia</span>
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-calendar"></i>
+                                8 października 2025
+                            </span>
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-clock"></i>
+                                7 min
+                            </span>
+                        </div>
+                        <h3 class="blog-card__title">
+                            Diagnostyka Komputerowa - Co To Jest i Dlaczego Warto?
+                        </h3>
+                        <p class="blog-card__excerpt">
+                            Nowoczesne samochody to komputery na kółkach. Diagnostyka komputerowa 
+                            pozwala szybko zidentyfikować problemy, zanim staną się poważnymi awariami. 
+                            Sprawdź, jak działa diagnostyka OBD2, co oznaczają kody błędów i dlaczego 
+                            warto ją wykonywać regularnie.
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Co sprawdza diagnostyka:</strong><br>
+                            • Silnik - wszystkie parametry pracy<br>
+                            • Skrzynia biegów - temperatura, ciśnienie<br>
+                            • ABS i ESP - czujniki i aktywność<br>
+                            • Airbag - sprawność i historia<br>
+                            • Klimatyzacja - ciśnienie, temperatura<br>
+                            • Akumulator - napięcie, stan ładowania<br>
+                            <br>
+                            <strong>Kiedy wykonać:</strong> Przed kupnem auta, przy lampce Check Engine, 
+                            co 15 000 km jako prewencja.
+                        </p>
+                        <a href="#diagnostyka" class="blog-card__link">
+                            Czytaj dalej
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 4: Chip Tuning (expanded) -->
+                <article class="blog-card" id="chip-tuning">
+                    <div class="blog-card__image">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop" 
+                             alt="Chip tuning samochodu" 
+                             loading="lazy">
+                        <span class="blog-card__category">Performance</span>
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-calendar"></i>
+                                5 października 2025
+                            </span>
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-clock"></i>
+                                10 min
+                            </span>
+                        </div>
+                        <h3 class="blog-card__title">
+                            Chip Tuning - Kompletny Przewodnik po Stage 1, 2 i 3
+                        </h3>
+                        <p class="blog-card__excerpt">
+                            Chip tuning to modyfikacja oprogramowania sterownika silnika (ECU) w celu 
+                            zwiększenia mocy i momentu obrotowego. Jest to najpopularniejsza i najbezpieczniejsza 
+                            metoda zwiększania osiągów samochodu.
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Stage 1 - Podstawowy tuning</strong><br>
+                            • Tylko modyfikacja software ECU<br>
+                            • Wzrost mocy: 20-40%<br>
+                            • Koszt: 1500-2500 zł<br>
+                            • Bezpieczne dla gwarancji (przy fachowcu)<br>
+                            <br>
+                            <strong>Stage 2 - Średniozaawansowany</strong><br>
+                            • Software + downpipe/intercooler<br>
+                            • Wzrost mocy: 30-60%<br>
+                            • Koszt: 3000-5000 zł<br>
+                            • Wymaga lepszych części<br>
+                            <br>
+                            <strong>Stage 3 - Hardcore</strong><br>
+                            • Wymiana turba, injectorów, pompki<br>
+                            • Wzrost mocy: 50-100%+<br>
+                            • Koszt: 10 000+ zł<br>
+                            • Tylko dla pasjonatów motorsportu
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Czy to bezpieczne?</strong><br>
+                            Tak, jeśli wykonane profesjonalnie! Używamy tylko sprawdzonych map od 
+                            renomowanych firm. Każdy tuning poprzedzamy dokładną diagnostyką i testem 
+                            pojemności silnika. Po tuningu wykonujemy test na drodze i hamowni.
+                        </p>
+                        <a href="#chip-tuning" class="blog-card__link">
+                            Czytaj dalej
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 5: Geometria kół -->
+                <article class="blog-card" id="geometria">
+                    <div class="blog-card__image">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop" 
+                             alt="Geometria kół 3D" 
+                             loading="lazy">
+                        <span class="blog-card__category">Zawieszenie</span>
+                    </div>
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-calendar"></i>
+                                3 października 2025
+                            </span>
+                            <span class="blog-card__meta-item">
+                                <i class="fas fa-clock"></i>
+                                6 min
+                            </span>
+                        </div>
+                        <h3 class="blog-card__title">
+                            Geometria Kół 3D - Kiedy i Dlaczego Jest Potrzebna?
+                        </h3>
+                        <p class="blog-card__excerpt">
+                            Geometria kół to kąty ustawienia zawieszenia, które mają ogromny wpływ na 
+                            prowadzenie, zużycie opon i bezpieczeństwo. Nowoczesna geometria 3D pozwala 
+                            precyzyjnie zmierzyć wszystkie parametry i ustawić je według specyfikacji 
+                            producenta lub custom setupu.
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Podstawowe parametry:</strong><br>
+                            • Zbieżność (toe) - kąt kół w poziomie<br>
+                            • Pochylenie (camber) - kąt kół w pionie<br>
+                            • Wyprzedzenie (caster) - kąt osi skrętu<br>
+                            <br>
+                            <strong>Kiedy wykonać geometrię:</strong><br>
+                            ✓ Po wymianie elementów zawieszenia<br>
+                            ✓ Po uderzeniu w krawężnik/dziurę<br>
+                            ✓ Przy nierównym zużyciu opon<br>
+                            ✓ Auto ciągnie na bok<br>
+                            ✓ Kierownica nie wraca do pionu<br>
+                            ✓ Co 20 000 km prewencyjnie
+                        </p>
+                        <p class="blog-card__excerpt">
+                            <strong>Setup dla drift/track:</strong><br>
+                            Oferujemy custom ustawienia geometrii pod konkretne zastosowanie - drift, 
+                            tor wyścigowy, daily drive. Większy camber z tyłu dla driftu, agresywny 
+                            caster dla lepszej stabilności - wszystko dopasowane do Twoich potrzeb.
+                        </p>
+                        <a href="#geometria" class="blog-card__link">
+                            Czytaj dalej
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div style="background: var(--gradient-gold); border-radius: var(--radius-lg); padding: var(--space-2xl); text-align: center;">
+                <h2 style="color: var(--black); font-size: var(--fs-h1); margin-bottom: var(--space-md);">
+                    Masz pytania?
+                </h2>
+                <p style="color: var(--black); font-size: 18px; max-width: 600px; margin: 0 auto var(--space-xl) auto;">
+                    Skontaktuj się z nami - chętnie doradzimy i odpowiemy na wszystkie pytania
+                </p>
+                <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="tel:726796168" class="btn" style="background: var(--black); color: var(--gold);">
+                        <i class="fas fa-phone"></i>
+                        726 796 168
+                    </a>
+                    <a href="kontakt.html" class="btn" style="background: transparent; color: var(--black); border: 2px solid var(--black);">
+                        <i class="fas fa-envelope"></i>
+                        Napisz do nas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__main">
+                <!-- About Column -->
+                <div>
+                    <div class="footer__logo">DriftBoyz</div>
+                    <p class="footer__tagline">DRIFT. CUSTOM. PERFORMANCE.</p>
+                    <p class="footer__description">
+                        Profesjonalny warsztat samochodowy w Piastowie. 
+                        Specjalizujemy się w mechanice, diagnostyce i tuningu.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://facebook.com/driftboyzgarage" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/driftboyzgarage" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@driftboyzgarage" class="social-icon" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://tiktok.com/@driftboyzgarage" class="social-icon" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="footer__section-title">Szybkie linki</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Start</a></li>
+                        <li><a href="o-nas.html" class="footer__link">O nas</a></li>
+                        <li><a href="uslugi.html" class="footer__link">Usługi</a></li>
+                        <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+                        <li><a href="cennik.html" class="footer__link">Cennik</a></li>
+                        <li><a href="blog.html" class="footer__link">Blog</a></li>
+                        <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="footer__section-title">Kontakt</h4>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-map-marker-alt footer__contact-icon"></i>
+                        <div>
+                            <p>ul. Warszawska 49/51</p>
+                            <p>05-820 Piastów</p>
+                        </div>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-phone footer__contact-icon"></i>
+                        <a href="tel:726796168" class="footer__contact-link">726 796 168</a>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-envelope footer__contact-icon"></i>
+                        <a href="mailto:kontakt@driftboyzgarage.pl" class="footer__contact-link">
+                            kontakt@driftboyzgarage.pl
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="footer__section-title">Godziny otwarcia</h4>
+                    <div class="footer__hours">
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Poniedziałek - Piątek:</span>
+                            <span class="footer__hour-time">8:00 - 18:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Sobota:</span>
+                            <span class="footer__hour-time">12:00 - 16:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Niedziela:</span>
+                            <span class="footer__hour-time">Zamknięte</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 DriftBoyz Garage. Wszystkie prawa zastrzeżone.
+                </p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Polityka prywatności</a>
+                    <a href="#" class="footer__legal-link">Regulamin</a>
+                    <a href="#" class="footer__legal-link">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="src/assets/js/main.js"></script>
+</body>
+</html>

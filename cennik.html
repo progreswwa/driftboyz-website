@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cennik usług warsztatowych DriftBoyz Garage Piastów. Przejrzyste ceny mechaniki, diagnostyki, tuningu, hamulców, zawieszenia i więcej.">
+    <meta name="keywords" content="cennik warsztat piastów, ceny mechanik, tuning cennik, naprawa samochodu ceny">
+    
+    <title>Cennik - DriftBoyz Garage | Ceny Usług Warsztatowych</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/assets/css/variables.css">
+    <link rel="stylesheet" href="src/assets/css/reset.css">
+    <link rel="stylesheet" href="src/assets/css/header.css">
+    <link rel="stylesheet" href="src/assets/css/hero.css">
+    <link rel="stylesheet" href="src/assets/css/components.css">
+    <link rel="stylesheet" href="src/assets/css/footer.css">
+    
+    <style>
+        /* Pricing Table Styles */
+        .pricing-table {
+            background: var(--gray-dark);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .pricing-table__header {
+            background: var(--gradient-gold);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .pricing-table__title {
+            color: var(--black);
+            font-size: var(--fs-h3);
+            font-family: var(--font-heading);
+            margin: 0;
+        }
+
+        .pricing-table__items {
+            padding: var(--space-md);
+        }
+
+        .pricing-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--gray-medium);
+            align-items: center;
+            transition: all var(--transition-normal);
+        }
+
+        .pricing-item:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-item:hover {
+            background: rgba(255, 181, 46, 0.05);
+        }
+
+        .pricing-item__service {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .pricing-item__description {
+            color: var(--gray-light);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .pricing-item__duration {
+            color: var(--blue-m);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .pricing-item__price {
+            color: var(--gold);
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+            font-family: var(--font-heading);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
+            .pricing-item__duration,
+            .pricing-item__price {
+                text-align: left;
+            }
+        }
+
+        /* Package Cards */
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+
+        .package-card {
+            background: var(--gray-dark);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all var(--transition-normal);
+        }
+
+        .package-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(255, 181, 46, 0.2);
+        }
+
+        .package-card.featured {
+            border-color: var(--gold);
+            position: relative;
+        }
+
+        .package-card.featured::before {
+            content: "POPULARNE";
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            padding: 6px 40px;
+            font-size: 12px;
+            font-weight: 700;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        .package-card__header {
+            padding: var(--space-xl);
+            text-align: center;
+            background: linear-gradient(135deg, var(--gray-medium) 0%, var(--gray-dark) 100%);
+        }
+
+        .package-card.featured .package-card__header {
+            background: var(--gradient-gold);
+        }
+
+        .package-card__name {
+            color: var(--white);
+            font-size: var(--fs-h3);
+            font-family: var(--font-heading);
+            margin-bottom: var(--space-sm);
+        }
+
+        .package-card.featured .package-card__name {
+            color: var(--black);
+        }
+
+        .package-card__price {
+            color: var(--gold);
+            font-size: 48px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+        }
+
+        .package-card.featured .package-card__price {
+            color: var(--black);
+        }
+
+        .package-card__period {
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+
+        .package-card.featured .package-card__period {
+            color: var(--black);
+            opacity: 0.8;
+        }
+
+        .package-card__body {
+            padding: var(--space-xl);
+        }
+
+        .package-card__features {
+            list-style: none;
+            margin-bottom: var(--space-xl);
+        }
+
+        .package-card__feature {
+            color: var(--gray-light);
+            padding: var(--space-sm) 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+        }
+
+        .package-card__feature i {
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        .package-card__cta {
+            width: 100%;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: var(--gray-dark);
+            border-left: 4px solid var(--gold);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .info-box__title {
+            color: var(--gold);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .info-box__content {
+            color: var(--gray-light);
+            line-height: 1.8;
+        }
+
+        .info-box__content ul {
+            list-style: none;
+            margin-top: var(--space-md);
+        }
+
+        .info-box__content li {
+            padding: 4px 0;
+            padding-left: var(--space-md);
+            position: relative;
+        }
+
+        .info-box__content li::before {
+            content: "•";
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER & NAVIGATION
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">DriftBoyz</a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Start</a></li>
+                    <li><a href="o-nas.html" class="nav__link">O nas</a></li>
+                    <li><a href="uslugi.html" class="nav__link">Usługi</a></li>
+                    <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                    <li><a href="cennik.html" class="nav__link active">Cennik</a></li>
+                    <li><a href="blog.html" class="nav__link">Blog</a></li>
+                    <li><a href="kontakt.html" class="nav__cta">Kontakt</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav__toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="hero" style="min-height: 50vh; padding-top: calc(var(--header-height) + 60px);">
+        <div class="hero__container">
+            <div class="hero__content">
+                <h1 class="hero__logo" style="font-size: var(--fs-h1);">Cennik</h1>
+                <p class="hero__tagline" style="font-size: 24px;">Przejrzyste ceny bez ukrytych kosztów</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         INFO BOX
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="info-box">
+                <div class="info-box__title">
+                    <i class="fas fa-info-circle"></i>
+                    Ważne informacje o cenach
+                </div>
+                <div class="info-box__content">
+                    <p>Podane ceny są cenami orientacyjnymi i mogą się różnić w zależności od:</p>
+                    <ul>
+                        <li>Modelu i marki pojazdu</li>
+                        <li>Zakresu wykonywanej usługi</li>
+                        <li>Rodzaju użytych części (oryginalne/zamienniki)</li>
+                        <li>Stanu technicznego pojazdu</li>
+                    </ul>
+                    <p style="margin-top: var(--space-md);">
+                        <strong>Dokładną wycenę otrzymasz po bezpłatnej diagnostyce.</strong> 
+                        Zawsze informujemy o kosztach przed rozpoczęciem prac.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PRICING TABLES
+         ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!-- Mechanika Pojazdowa -->
+            <div class="pricing-table">
+                <div class="pricing-table__header">
+                    <h2 class="pricing-table__title">
+                        <i class="fas fa-cog" style="margin-right: 8px;"></i>
+                        Mechanika Pojazdowa
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana oleju i filtrów</div>
+                            <div class="pricing-item__description">Olej + filtr oleju + filtr powietrza + filtr kabinowy</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 30 min</div>
+                        <div class="pricing-item__price">od 150 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana rozrządu</div>
+                            <div class="pricing-item__description">Pasek + rolki + pompka + uszczelki</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 4-6 godz</div>
+                        <div class="pricing-item__price">od 800 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana sprzęgła</div>
+                            <div class="pricing-item__description">Tarcza + docisk + łożysko + robocizna</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 5-8 godz</div>
+                        <div class="pricing-item__price">od 1200 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Naprawa silnika</div>
+                            <div class="pricing-item__description">Wycena indywidualna po diagnostyce</div>
+                        </div>
+                        <div class="pricing-item__duration">zależnie</div>
+                        <div class="pricing-item__price">od 2000 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagnostyka -->
+            <div class="pricing-table">
+                <div class="pricing-table__header" style="background: var(--gradient-blue);">
+                    <h2 class="pricing-table__title" style="color: var(--white);">
+                        <i class="fas fa-laptop-code" style="margin-right: 8px;"></i>
+                        Diagnostyka Komputerowa
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Diagnostyka komputerowa podstawowa</div>
+                            <div class="pricing-item__description">Odczyt błędów ze wszystkich sterowników</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 20 min</div>
+                        <div class="pricing-item__price">od 100 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Diagnostyka rozszerzona</div>
+                            <div class="pricing-item__description">Odczyt + analiza + parametry live data</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 1 godz</div>
+                        <div class="pricing-item__price">od 200 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Kasowanie błędów</div>
+                            <div class="pricing-item__description">Po wykonanej naprawie</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 10 min</div>
+                        <div class="pricing-item__price">gratis</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Kodowanie sterowników</div>
+                            <div class="pricing-item__description">Programowanie funkcji i modułów</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 1-2 godz</div>
+                        <div class="pricing-item__price">od 300 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klimatyzacja -->
+            <div class="pricing-table">
+                <div class="pricing-table__header">
+                    <h2 class="pricing-table__title">
+                        <i class="fas fa-snowflake" style="margin-right: 8px;"></i>
+                        Serwis Klimatyzacji
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Napełnienie klimatyzacji</div>
+                            <div class="pricing-item__description">Uzupełnienie czynnika R134a lub R1234yf</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 30 min</div>
+                        <div class="pricing-item__price">od 120 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Dezynfekcja klimatyzacji</div>
+                            <div class="pricing-item__description">Ozonowanie + środki dezynfekujące</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 45 min</div>
+                        <div class="pricing-item__price">od 150 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Test szczelności</div>
+                            <div class="pricing-item__description">Sprawdzenie nieszczelności układu</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 30 min</div>
+                        <div class="pricing-item__price">od 100 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana sprężarki klimatyzacji</div>
+                            <div class="pricing-item__description">Część + robocizna + napełnienie</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 2-3 godz</div>
+                        <div class="pricing-item__price">od 800 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opony -->
+            <div class="pricing-table">
+                <div class="pricing-table__header" style="background: var(--gradient-blue);">
+                    <h2 class="pricing-table__title" style="color: var(--white);">
+                        <i class="fas fa-circle-notch" style="margin-right: 8px;"></i>
+                        Wymiana Opon
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana kół (4 szt)</div>
+                            <div class="pricing-item__description">Zdjęcie + założenie kompletu kół</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 15 min</div>
+                        <div class="pricing-item__price">80 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana opon (4 szt)</div>
+                            <div class="pricing-item__description">Zdjęcie starych + założenie nowych opon na felgi</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 30 min</div>
+                        <div class="pricing-item__price">120 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wyważanie kół (4 szt)</div>
+                            <div class="pricing-item__description">Komputerowe wyważanie</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 20 min</div>
+                        <div class="pricing-item__price">80 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Przechowywanie kół (sezon)</div>
+                            <div class="pricing-item__description">Magazynowanie kompletu kół przez 6 miesięcy</div>
+                        </div>
+                        <div class="pricing-item__duration">sezon</div>
+                        <div class="pricing-item__price">150 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hamulce -->
+            <div class="pricing-table">
+                <div class="pricing-table__header">
+                    <h2 class="pricing-table__title">
+                        <i class="fas fa-brake-warning" style="margin-right: 8px;"></i>
+                        Układ Hamulcowy
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana klocków hamulcowych (oś)</div>
+                            <div class="pricing-item__description">Klocki + robocizna</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 1 godz</div>
+                        <div class="pricing-item__price">od 200 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana tarcz hamulcowych (oś)</div>
+                            <div class="pricing-item__description">Tarcze + klocki + robocizna</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 1.5 godz</div>
+                        <div class="pricing-item__price">od 400 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana płynu hamulcowego</div>
+                            <div class="pricing-item__description">Płyn DOT4/DOT5 + odpowietrzenie</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 45 min</div>
+                        <div class="pricing-item__price">od 150 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Regeneracja zacisków</div>
+                            <div class="pricing-item__description">Czyszczenie + smarowanie + uszczelki</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 2 godz</div>
+                        <div class="pricing-item__price">od 300 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zawieszenie -->
+            <div class="pricing-table">
+                <div class="pricing-table__header" style="background: var(--gradient-blue);">
+                    <h2 class="pricing-table__title" style="color: var(--white);">
+                        <i class="fas fa-car-crash" style="margin-right: 8px;"></i>
+                        Zawieszenie i Geometria
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Geometria kół 3D</div>
+                            <div class="pricing-item__description">Pomiar + ustawienie zbieżności</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 1 godz</div>
+                        <div class="pricing-item__price">od 180 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana amortyzatorów (oś)</div>
+                            <div class="pricing-item__description">2 amortyzatory + robocizna</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 2 godz</div>
+                        <div class="pricing-item__price">od 400 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana wahaczy (komplet)</div>
+                            <div class="pricing-item__description">Wahacze + łączniki + geometria</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 3-4 godz</div>
+                        <div class="pricing-item__price">od 800 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Setup drift/track</div>
+                            <div class="pricing-item__description">Custom ustawienia pod tor lub drift</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 2 godz</div>
+                        <div class="pricing-item__price">od 500 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tuning -->
+            <div class="pricing-table">
+                <div class="pricing-table__header">
+                    <h2 class="pricing-table__title">
+                        <i class="fas fa-tachometer-alt" style="margin-right: 8px;"></i>
+                        Tuning & Performance
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Chip tuning Stage 1</div>
+                            <div class="pricing-item__description">Remap ECU + optymalizacja</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 2-3 godz</div>
+                        <div class="pricing-item__price">od 1500 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Chip tuning Stage 2</div>
+                            <div class="pricing-item__description">Remap + downpipe + modyfikacje</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 1 dzień</div>
+                        <div class="pricing-item__price">od 2500 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Montaż wydech sportowy</div>
+                            <div class="pricing-item__description">Cat-back lub turbo-back</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 2-3 godz</div>
+                        <div class="pricing-item__price">od 500 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Custom build - wycena indywidualna</div>
+                            <div class="pricing-item__description">Kompleksowe projekty tuningowe i drift builds</div>
+                        </div>
+                        <div class="pricing-item__duration">zależnie</div>
+                        <div class="pricing-item__price">od 5000 zł</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wulkanizacja -->
+            <div class="pricing-table">
+                <div class="pricing-table__header" style="background: var(--gradient-blue);">
+                    <h2 class="pricing-table__title" style="color: var(--white);">
+                        <i class="fas fa-tools" style="margin-right: 8px;"></i>
+                        Wulkanizacja
+                    </h2>
+                </div>
+                <div class="pricing-table__items">
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Naprawa opony (przebicie)</div>
+                            <div class="pricing-item__description">Łatanie na gorąco</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 20 min</div>
+                        <div class="pricing-item__price">30 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana wentyla</div>
+                            <div class="pricing-item__description">Wentyl metalowy lub gumowy</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 10 min</div>
+                        <div class="pricing-item__price">20 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Wymiana czujnika TPMS</div>
+                            <div class="pricing-item__description">Czujnik ciśnienia + programowanie</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 30 min</div>
+                        <div class="pricing-item__price">od 250 zł</div>
+                    </div>
+                    <div class="pricing-item">
+                        <div>
+                            <div class="pricing-item__service">Pompowanie azot (4 koła)</div>
+                            <div class="pricing-item__description">Napełnienie opon azotem</div>
+                        </div>
+                        <div class="pricing-item__duration">~ 15 min</div>
+                        <div class="pricing-item__price">80 zł</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PAKIETY SERWISOWE
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div class="section__header">
+                <p class="section__subtitle">PAKIETY SERWISOWE</p>
+                <h2 class="section__title">Zaoszczędź z pakietami</h2>
+                <p class="section__description">
+                    Kompleksowa obsługa w atrakcyjnej cenie
+                </p>
+            </div>
+
+            <div class="package-grid">
+                <!-- Basic Package -->
+                <div class="package-card">
+                    <div class="package-card__header">
+                        <h3 class="package-card__name">Pakiet Basic</h3>
+                        <div class="package-card__price">450 zł</div>
+                        <div class="package-card__period">zamiast 550 zł</div>
+                    </div>
+                    <div class="package-card__body">
+                        <ul class="package-card__features">
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wymiana oleju i filtra oleju</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wymiana filtra powietrza</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wymiana filtra kabinowego</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Diagnostyka komputerowa podstawowa</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Przegląd płynów eksploatacyjnych</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Przegląd oświetlenia</span>
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="btn package-card__cta">
+                            <i class="fas fa-shopping-cart"></i>
+                            Wybierz pakiet
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="package-card featured">
+                    <div class="package-card__header">
+                        <h3 class="package-card__name">Pakiet Premium</h3>
+                        <div class="package-card__price">850 zł</div>
+                        <div class="package-card__period">zamiast 1100 zł</div>
+                    </div>
+                    <div class="package-card__body">
+                        <ul class="package-card__features">
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wszystko z pakietu Basic</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wymiana świec zapłonowych</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wymiana płynu hamulcowego</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Diagnostyka rozszerzona</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Geometria kół 3D</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Napełnienie klimatyzacji</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Mycie auta gratis</span>
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="btn package-card__cta">
+                            <i class="fas fa-shopping-cart"></i>
+                            Wybierz pakiet
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Performance Package -->
+                <div class="package-card">
+                    <div class="package-card__header">
+                        <h3 class="package-card__name">Pakiet Performance</h3>
+                        <div class="package-card__price">2500 zł</div>
+                        <div class="package-card__period">zamiast 3200 zł</div>
+                    </div>
+                    <div class="package-card__body">
+                        <ul class="package-card__features">
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Wszystko z pakietu Premium</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Chip tuning Stage 1</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Custom setup zawieszenia</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Montaż wydech sportowy</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Test na hamowni (opcja)</span>
+                            </li>
+                            <li class="package-card__feature">
+                                <i class="fas fa-check"></i>
+                                <span>Konsultacja tuningowa</span>
+                            </li>
+                        </ul>
+                        <a href="kontakt.html" class="btn package-card__cta">
+                            <i class="fas fa-shopping-cart"></i>
+                            Wybierz pakiet
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div style="background: var(--gradient-gold); border-radius: var(--radius-lg); padding: var(--space-2xl); text-align: center;">
+                <h2 style="color: var(--black); font-size: var(--fs-h1); margin-bottom: var(--space-md);">
+                    Potrzebujesz wyceny?
+                </h2>
+                <p style="color: var(--black); font-size: 18px; max-width: 600px; margin: 0 auto var(--space-xl) auto;">
+                    Zadzwoń lub napisz - wycenimy Twoją naprawę bezpłatnie
+                </p>
+                <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="tel:726796168" class="btn" style="background: var(--black); color: var(--gold);">
+                        <i class="fas fa-phone"></i>
+                        726 796 168
+                    </a>
+                    <a href="kontakt.html" class="btn" style="background: transparent; color: var(--black); border: 2px solid var(--black);">
+                        <i class="fas fa-envelope"></i>
+                        Wyślij zapytanie
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__main">
+                <!-- About Column -->
+                <div>
+                    <div class="footer__logo">DriftBoyz</div>
+                    <p class="footer__tagline">DRIFT. CUSTOM. PERFORMANCE.</p>
+                    <p class="footer__description">
+                        Profesjonalny warsztat samochodowy w Piastowie. 
+                        Specjalizujemy się w mechanice, diagnostyce i tuningu.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://facebook.com/driftboyzgarage" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/driftboyzgarage" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@driftboyzgarage" class="social-icon" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://tiktok.com/@driftboyzgarage" class="social-icon" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="footer__section-title">Szybkie linki</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Start</a></li>
+                        <li><a href="o-nas.html" class="footer__link">O nas</a></li>
+                        <li><a href="uslugi.html" class="footer__link">Usługi</a></li>
+                        <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+                        <li><a href="cennik.html" class="footer__link">Cennik</a></li>
+                        <li><a href="blog.html" class="footer__link">Blog</a></li>
+                        <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="footer__section-title">Kontakt</h4>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-map-marker-alt footer__contact-icon"></i>
+                        <div>
+                            <p>ul. Warszawska 49/51</p>
+                            <p>05-820 Piastów</p>
+                        </div>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-phone footer__contact-icon"></i>
+                        <a href="tel:726796168" class="footer__contact-link">726 796 168</a>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-envelope footer__contact-icon"></i>
+                        <a href="mailto:kontakt@driftboyzgarage.pl" class="footer__contact-link">
+                            kontakt@driftboyzgarage.pl
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="footer__section-title">Godziny otwarcia</h4>
+                    <div class="footer__hours">
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Poniedziałek - Piątek:</span>
+                            <span class="footer__hour-time">8:00 - 18:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Sobota:</span>
+                            <span class="footer__hour-time">12:00 - 16:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Niedziela:</span>
+                            <span class="footer__hour-time">Zamknięte</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 DriftBoyz Garage. Wszystkie prawa zastrzeżone.
+                </p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Polityka prywatności</a>
+                    <a href="#" class="footer__legal-link">Regulamin</a>
+                    <a href="#" class="footer__legal-link">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="src/assets/js/main.js"></script>
+</body>
+</html>

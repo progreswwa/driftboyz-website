@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zobacz nasze realizacje - portfolio projektów DriftBoyz Garage. Mechanika, tuning, drift, custom builds. Warsztat samochodowy Piastów.">
+    <meta name="keywords" content="portfolio warsztat piastów, realizacje tuning, drift builds, custom cars">
+    
+    <title>Portfolio - DriftBoyz Garage | Nasze Realizacje</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/assets/css/variables.css">
+    <link rel="stylesheet" href="src/assets/css/reset.css">
+    <link rel="stylesheet" href="src/assets/css/header.css">
+    <link rel="stylesheet" href="src/assets/css/hero.css">
+    <link rel="stylesheet" href="src/assets/css/components.css">
+    <link rel="stylesheet" href="src/assets/css/footer.css">
+    
+    <style>
+        /* Portfolio Filter Buttons */
+        .portfolio-filters {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: var(--gray-dark);
+            color: var(--gray-light);
+            border: 2px solid var(--gray-medium);
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Portfolio Card */
+        .portfolio-card {
+            position: relative;
+            background: var(--gray-dark);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: 2px solid transparent;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 40px rgba(255, 181, 46, 0.3);
+        }
+
+        .portfolio-card__image {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .portfolio-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all var(--transition-slow);
+        }
+
+        .portfolio-card:hover .portfolio-card__image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-card__category {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            padding: 6px 12px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-card__content {
+            padding: var(--space-lg);
+        }
+
+        .portfolio-card__title {
+            color: var(--white);
+            font-size: var(--fs-h4);
+            margin-bottom: var(--space-sm);
+            font-family: var(--font-heading);
+        }
+
+        .portfolio-card__description {
+            color: var(--gray-light);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .portfolio-card__tags {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .portfolio-card__tag {
+            padding: 4px 12px;
+            background: var(--gray-medium);
+            color: var(--gray-light);
+            font-size: 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Hide filtered items */
+        .portfolio-card.hidden {
+            display: none;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox__content {
+            max-width: 1200px;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .lightbox__image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: var(--radius-lg);
+        }
+
+        .lightbox__close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 32px;
+            cursor: pointer;
+            padding: var(--space-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .lightbox__close:hover {
+            color: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        .lightbox__info {
+            margin-top: var(--space-md);
+            text-align: center;
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER & NAVIGATION
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">DriftBoyz</a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Start</a></li>
+                    <li><a href="o-nas.html" class="nav__link">O nas</a></li>
+                    <li><a href="uslugi.html" class="nav__link">Usługi</a></li>
+                    <li><a href="portfolio.html" class="nav__link active">Portfolio</a></li>
+                    <li><a href="cennik.html" class="nav__link">Cennik</a></li>
+                    <li><a href="blog.html" class="nav__link">Blog</a></li>
+                    <li><a href="kontakt.html" class="nav__cta">Kontakt</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav__toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+         PAGE HERO
+         ============================================ -->
+    <section class="hero" style="min-height: 50vh; padding-top: calc(var(--header-height) + 60px);">
+        <div class="hero__container">
+            <div class="hero__content">
+                <h1 class="hero__logo" style="font-size: var(--fs-h1);">Portfolio</h1>
+                <p class="hero__tagline" style="font-size: 24px;">Zobacz nasze realizacje</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PORTFOLIO SECTION
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <p class="section__subtitle">NASZE PRACE</p>
+                <h2 class="section__title">Zrealizowane projekty</h2>
+                <p class="section__description">
+                    Od prostych napraw po zaawansowane projekty tuningowe i drift builds
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="wszystkie">
+                    Wszystkie
+                </button>
+                <button class="filter-btn" data-filter="mechanika">
+                    Mechanika
+                </button>
+                <button class="filter-btn" data-filter="tuning">
+                    Tuning
+                </button>
+                <button class="filter-btn" data-filter="drift">
+                    Drift
+                </button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-card" data-category="drift tuning">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop" 
+                             alt="BMW E36 Drift Build" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Drift</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">BMW E36 Drift Build</h3>
+                        <p class="portfolio-card__description">
+                            Kompletna przebudowa BMW E36 na samochód drift. Swap silnika, custom zawieszenie, 
+                            cage i pełny setup pod tor.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Swap silnika</span>
+                            <span class="portfolio-card__tag">Zawieszenie</span>
+                            <span class="portfolio-card__tag">Klatka</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-card" data-category="tuning">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop" 
+                             alt="Audi A4 Stage 2" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Tuning</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Audi A4 B8 Stage 2</h3>
+                        <p class="portfolio-card__description">
+                            Chip tuning Stage 2, downpipe, intercooler, intake. Wzrost mocy z 170 KM do 250 KM. 
+                            Profesjonalny remap ECU.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Chip tuning</span>
+                            <span class="portfolio-card__tag">Wydech</span>
+                            <span class="portfolio-card__tag">+80 KM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-card" data-category="mechanika">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&h=400&fit=crop" 
+                             alt="Mercedes W204 Naprawa" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Mechanika</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Mercedes W204 - Naprawa Silnika</h3>
+                        <p class="portfolio-card__description">
+                            Kompleksowa naprawa silnika M271. Wymiana łańcucha rozrządu, regeneracja głowicy, 
+                            wymiana pompki wody i termostatu.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Rozrząd</span>
+                            <span class="portfolio-card__tag">Głowica</span>
+                            <span class="portfolio-card__tag">Diagnostyka</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-card" data-category="drift">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&h=400&fit=crop" 
+                             alt="Nissan S14 Drift" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Drift</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Nissan S14 240SX Drift Setup</h3>
+                        <p class="portfolio-card__description">
+                            Setup zawieszenia drift, wymiana ramion wahliwe, coilovery BC Racing, 
+                            hydrauliczny hamulec ręczny.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Coilovery</span>
+                            <span class="portfolio-card__tag">Hydraulika</span>
+                            <span class="portfolio-card__tag">Drift setup</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-card" data-category="tuning">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&h=400&fit=crop" 
+                             alt="VW Golf GTI" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Tuning</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">VW Golf 7 GTI Stage 1</h3>
+                        <p class="portfolio-card__description">
+                            Chip tuning Stage 1, cold air intake, custom wydech. Wzrost mocy do 280 KM. 
+                            Poprawa charakterystyki i dźwięku.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Stage 1</span>
+                            <span class="portfolio-card__tag">Intake</span>
+                            <span class="portfolio-card__tag">Wydech</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-card" data-category="mechanika">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600&h=400&fit=crop" 
+                             alt="Toyota Corolla Serwis" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Mechanika</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Toyota Corolla - Przegląd 150k km</h3>
+                        <p class="portfolio-card__description">
+                            Kompleksowy przegląd 150k km. Wymiana oleju, filtrów, świec, płynu hamulcowego, 
+                            klocków hamulcowych i diagnostyka.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Przegląd</span>
+                            <span class="portfolio-card__tag">Hamulce</span>
+                            <span class="portfolio-card__tag">Diagnostyka</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="portfolio-card" data-category="drift tuning">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1617814065893-d5f1f5a306f0?w=600&h=400&fit=crop" 
+                             alt="Mazda RX-8 Rotary" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Drift</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Mazda RX-8 Rotary Build</h3>
+                        <p class="portfolio-card__description">
+                            Rebuild silnika rotacyjnego 13B, custom turbo setup, standalone ECU, 
+                            przygotowanie do driftu.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Rotary</span>
+                            <span class="portfolio-card__tag">Turbo</span>
+                            <span class="portfolio-card__tag">ECU</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="portfolio-card" data-category="mechanika">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop" 
+                             alt="Ford Focus Zawieszenie" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Mechanika</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Ford Focus - Regeneracja Zawieszenia</h3>
+                        <p class="portfolio-card__description">
+                            Kompleksowa wymiana zawieszenia. Amortyzatory, sprężyny, wahacze, łączniki stabilizatora, 
+                            końcówki drążków i geometria.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Zawieszenie</span>
+                            <span class="portfolio-card__tag">Geometria</span>
+                            <span class="portfolio-card__tag">Regeneracja</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="portfolio-card" data-category="tuning">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600&h=400&fit=crop" 
+                             alt="Subaru WRX STI" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Tuning</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Subaru WRX STI Performance</h3>
+                        <p class="portfolio-card__description">
+                            Stage 2+ build - turbo upgrade, intercooler, injectors, fuel pump, custom tune. 
+                            Moc 400+ KM.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Turbo upgrade</span>
+                            <span class="portfolio-card__tag">400+ KM</span>
+                            <span class="portfolio-card__tag">Custom tune</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 10 -->
+                <div class="portfolio-card" data-category="mechanika">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=400&fit=crop" 
+                             alt="Skoda Octavia Klimatyzacja" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Mechanika</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Skoda Octavia - Naprawa Klimatyzacji</h3>
+                        <p class="portfolio-card__description">
+                            Naprawa nieszczelności klimatyzacji, wymiana sprężarki, skraplacza, 
+                            uzupełnienie czynnika i dezynfekcja.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Klimatyzacja</span>
+                            <span class="portfolio-card__tag">Sprężarka</span>
+                            <span class="portfolio-card__tag">Dezynfekcja</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 11 -->
+                <div class="portfolio-card" data-category="drift">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?w=600&h=400&fit=crop" 
+                             alt="Toyota GT86 Drift" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Drift</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Toyota GT86 Drift Spec</h3>
+                        <p class="portfolio-card__description">
+                            Przebudowa GT86 na drift spec. Turbo kit, LSD, angle kit, coilovery, 
+                            roll cage i full safety equipment.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">Turbo kit</span>
+                            <span class="portfolio-card__tag">LSD</span>
+                            <span class="portfolio-card__tag">Angle kit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 12 -->
+                <div class="portfolio-card" data-category="tuning mechanika">
+                    <div class="portfolio-card__image">
+                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop" 
+                             alt="Seat Leon Cupra" 
+                             loading="lazy">
+                        <span class="portfolio-card__category">Tuning</span>
+                    </div>
+                    <div class="portfolio-card__content">
+                        <h3 class="portfolio-card__title">Seat Leon Cupra 300 - Full Service</h3>
+                        <p class="portfolio-card__description">
+                            Kompleksowy serwis: wymiana DSG, chip tuning Stage 1, hamulce Brembo, 
+                            zawieszenie KW V3, full detailing.
+                        </p>
+                        <div class="portfolio-card__tags">
+                            <span class="portfolio-card__tag">DSG service</span>
+                            <span class="portfolio-card__tag">Stage 1</span>
+                            <span class="portfolio-card__tag">Brembo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="section" style="background: var(--gray-dark);">
+        <div class="container">
+            <div style="background: var(--gradient-gold); border-radius: var(--radius-lg); padding: var(--space-2xl); text-align: center;">
+                <h2 style="color: var(--black); font-size: var(--fs-h1); margin-bottom: var(--space-md);">
+                    Chcesz podobny projekt?
+                </h2>
+                <p style="color: var(--black); font-size: 18px; max-width: 600px; margin: 0 auto var(--space-xl) auto;">
+                    Skontaktuj się z nami i omów swój pomysł. Zrealizujemy go na najwyższym poziomie.
+                </p>
+                <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="tel:726796168" class="btn" style="background: var(--black); color: var(--gold);">
+                        <i class="fas fa-phone"></i>
+                        726 796 168
+                    </a>
+                    <a href="kontakt.html" class="btn" style="background: transparent; color: var(--black); border: 2px solid var(--black);">
+                        <i class="fas fa-calendar"></i>
+                        Umów konsultację
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__main">
+                <!-- About Column -->
+                <div>
+                    <div class="footer__logo">DriftBoyz</div>
+                    <p class="footer__tagline">DRIFT. CUSTOM. PERFORMANCE.</p>
+                    <p class="footer__description">
+                        Profesjonalny warsztat samochodowy w Piastowie. 
+                        Specjalizujemy się w mechanice, diagnostyce i tuningu.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://facebook.com/driftboyzgarage" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/driftboyzgarage" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@driftboyzgarage" class="social-icon" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://tiktok.com/@driftboyzgarage" class="social-icon" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="footer__section-title">Szybkie linki</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Start</a></li>
+                        <li><a href="o-nas.html" class="footer__link">O nas</a></li>
+                        <li><a href="uslugi.html" class="footer__link">Usługi</a></li>
+                        <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+                        <li><a href="cennik.html" class="footer__link">Cennik</a></li>
+                        <li><a href="blog.html" class="footer__link">Blog</a></li>
+                        <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="footer__section-title">Kontakt</h4>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-map-marker-alt footer__contact-icon"></i>
+                        <div>
+                            <p>ul. Warszawska 49/51</p>
+                            <p>05-820 Piastów</p>
+                        </div>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-phone footer__contact-icon"></i>
+                        <a href="tel:726796168" class="footer__contact-link">726 796 168</a>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class="fas fa-envelope footer__contact-icon"></i>
+                        <a href="mailto:kontakt@driftboyzgarage.pl" class="footer__contact-link">
+                            kontakt@driftboyzgarage.pl
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="footer__section-title">Godziny otwarcia</h4>
+                    <div class="footer__hours">
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Poniedziałek - Piątek:</span>
+                            <span class="footer__hour-time">8:00 - 18:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Sobota:</span>
+                            <span class="footer__hour-time">12:00 - 16:00</span>
+                        </div>
+                        <div class="footer__hour-item">
+                            <span class="footer__hour-day">Niedziela:</span>
+                            <span class="footer__hour-time">Zamknięte</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 DriftBoyz Garage. Wszystkie prawa zastrzeżone.
+                </p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Polityka prywatności</a>
+                    <a href="#" class="footer__legal-link">Regulamin</a>
+                    <a href="#" class="footer__legal-link">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox__content">
+            <button class="lightbox__close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" class="lightbox__image" id="lightboxImage">
+            <div class="lightbox__info" id="lightboxInfo"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="src/assets/js/main.js"></script>
+    <script>
+        // Portfolio Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter cards
+                portfolioCards.forEach(card => {
+                    if (filter === 'wszystkie') {
+                        card.classList.remove('hidden');
+                    } else {
+                        const categories = card.getAttribute('data-category');
+                        if (categories.includes(filter)) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxInfo = document.getElementById('lightboxInfo');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        portfolioCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const image = card.querySelector('.portfolio-card__image img');
+                const title = card.querySelector('.portfolio-card__title').textContent;
+                const description = card.querySelector('.portfolio-card__description').textContent;
+                
+                lightboxImage.src = image.src;
+                lightboxImage.alt = image.alt;
+                lightboxInfo.innerHTML = `<h3>${title}</h3><p>${description}</p>`;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Close lightbox with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
